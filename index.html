@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Letter For You ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      font-family: Georgia, serif;
+      background: linear-gradient(135deg, #ffe1e8, #fff5ed);
+      color: #713d50;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .heart {
+      font-size: 55px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    h1 {
+      font-size: clamp(28px, 6vw, 38px);
+      margin-bottom: 12px;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    button {
+      border: none;
+      border-radius: 30px;
+      padding: 13px 24px;
+      margin-top: 15px;
+      background: #c65f80;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #a74365;
+      transform: translateY(-3px);
+    }
+
+    .letter {
+      display: none;
+      margin-top: 24px;
+      padding: 28px;
+      background: #fffdf8;
+      border: 1px solid #f3d5dc;
+      border-radius: 12px;
+      text-align: left;
+      box-shadow: 0 12px 35px #a75b7220;
+      animation: appear 0.8s ease;
+    }
+
+    .letter h2 {
+      text-align: center;
+      color: #b54d70;
+    }
+
+    .letter p {
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .signature {
+      text-align: right;
+      font-style: italic;
+      margin-top: 24px;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -30px;
+      pointer-events: none;
+      animation: floatUp 5s linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes heartbeat {
+      50% { transform: scale(1.15); }
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .letter {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div class="heart">💌</div>
+
+    <h1>For My Favorite Person</h1>
+
+    <p>
+      I made something for you.<br>
+      Take your time and open it when you're ready. ❤️
+    </p>
+
+    <button id="openButton" onclick="openLetter()">
+      Open My Letter 💗
+    </button>
+
+    <article class="letter" id="letter">
+      <h2>My Dearest Love,</h2>
+
+      <p id="message">Hi, love!
+
+I just want to remind you how much you mean to me. You make my ordinary days feel special, and I'm grateful for all the little moments we share.
+
+I know that not every day will be perfect, but I want us to keep choosing to understand each other, support each other, and grow together.
+
+Thank you for being part of my life. I hope I can continue giving you reasons to smile and reminding you that you are loved.
+
+No matter how busy life gets, I hope you never forget how special you are to me.
+
+I love you, always. ❤️</p>
+
+      <p class="signature">
+        With all my love,<br>
+        Your favorite person 💕
+      </p>
+    </article>
+  </main>
+
+  <script>
+    function openLetter() {
+      const letter = document.getElementById("letter");
+      const button = document.getElementById("openButton");
+
+      letter.style.display = "block";
+      button.textContent = "A little more love for you ❤️";
+      button.disabled = true;
+
+      letter.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      // Create floating hearts
+      for (let i = 0; i < 18; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("span");
+          heart.className = "floating-heart";
+          heart.textContent = ["❤️", "💕", "💗", "💖"][
+            Math.floor(Math.random() * 4)
+          ];
+
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.fontSize = (16 + Math.random() * 20) + "px";
+          heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+          document.body.appendChild(heart);
+
+          setTimeout(() => heart.remove(), 6500);
+        }, i * 120);
+      }
+    }
+  </script>
+</body>
+</html>
